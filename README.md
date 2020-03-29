@@ -1,6 +1,6 @@
 # NSWEEPER [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.com/shlomnissan/cpp-project.svg?branch=master)](https://travis-ci.com/shlomnissan/cpp-project)
 
-This is minesweeper in the terminalb, built with c++ and ncurses.
+This is minesweeper in the terminal, built with c++ and ncurses.
 
 ![screenshot](./screenshot.png)
 
