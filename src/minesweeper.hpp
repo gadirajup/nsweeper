@@ -5,27 +5,13 @@
 
 #include <cstdlib>
 #include <chrono>
-
-struct Node{
-    int x;
-    int y;
-
-    int value;
-    bool visited;
-    bool is_mine;
-    bool is_flag;
-
-    int num_neighbours;
-    Node **neighbours;
-};
+#include "node.hpp"
 
 class Minesweeper{
  private:
-    // number of cells opened that are not mines
     int opened_cells;
     bool first_click;
 
-    // time statistics
     std::chrono::time_point<std::chrono::system_clock> start_time;
     std::chrono::time_point<std::chrono::system_clock> end_time;
 
@@ -194,11 +180,10 @@ void Minesweeper::set_up_minefield() {
     }
 }
 
-void Minesweeper::reset_minefield(){
+void Minesweeper::reset_minefield() {
     Node *cell;
-    
-    // reset each cell to default values
-    for (int i = 0; i < height * width; i++){
+
+    for (int i = 0; i < height * width; i++) {
         cell = &board[i];
 
         cell->is_mine = false;

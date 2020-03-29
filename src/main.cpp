@@ -4,10 +4,15 @@
 #include <ncurses.h>
 #include <iostream>
 #include <cstring>
+#include <chrono>
+#include <thread>
 #include "minesweeper.hpp"
 
 
 void update_display(WINDOW *win, Minesweeper game) {
+    wmove(win, 0, 1);
+    waddstr(win, "nsweeper");
+
     char character_map[9] = {'_', '1', '2', '3', '4', '5', '6', '7', '8'};
     int current_row = 1;
     for (int i = 0; i < game.height; i++) {
@@ -48,7 +53,8 @@ int getDifficultySelection() {
     std::cout << "2. Intermediate 16 x 16 board (40 mines)\n";
     std::cout << "3. Advanced 16 x 30 board (99 mines)\n\n";
 
-    selection = std::cin.get();
+    std::cin >> selection;
+    std::cout << selection << std::endl;
     return selection;
 }
 
@@ -71,7 +77,7 @@ int main() {
 
     displayIntroMessage();
 
-    switch (getDifficultySelection()) {
+    switch (static_cast<int>(getDifficultySelection())) {
         case 1:
             height = 8;
             width = 8;
@@ -95,6 +101,7 @@ int main() {
             break;
     }
 
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     Minesweeper game = Minesweeper(height, width, mines);
 
     initscr();
@@ -134,11 +141,9 @@ int main() {
                     case KEY_ENTE:
                         game.open_cell(cur_y - 1, cur_x - 1);
                         break;
-
                     case KEY_F:
                         game.toggle_flag(cur_y - 1, cur_x - 1);
                         break;
-
                     default:
                         break;
                 }
